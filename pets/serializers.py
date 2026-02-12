@@ -31,6 +31,6 @@ class PetSerializer(serializers.ModelSerializer):
             'vaccines',
         ]
 
-    def get_idade(self, obj):
+    def get_idade(self, obj: Pet) -> int:
         today = date.today()
         return today.year - obj.data_nascimento.year
