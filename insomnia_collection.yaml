@@ -1,0 +1,364 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: PetHealth API
+meta:
+  id: wrk_ee1be75e2f464bbc992694e734e8c2a0
+  created: 1770896489030
+  modified: 1770896489030
+  description: ""
+collection:
+  - name: Auth
+    meta:
+      id: fld_e9e00121d8aa4bfdbde95f2058bf3d64
+      created: 1770896514279
+      modified: 1770901271505
+      sortKey: -1770896526216
+      description: ""
+    children:
+      - url: "{{ base_url }}/api/auth/login/"
+        name: Login (Tutor)
+        meta:
+          id: req_5068765ff2d545c28e9db22da7d4e84b
+          created: 1770897023801
+          modified: 1770900820795
+          isPrivate: false
+          description: ""
+          sortKey: -1770897394682
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "username": "tutor_demo",
+              "password": "SenhaForte123@"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/auth/register/"
+        name: Register (Tutor)
+        meta:
+          id: req_c67984402a0149c5a2f6d32ad3d86283
+          created: 1770898035205
+          modified: 1770899898002
+          isPrivate: false
+          description: ""
+          sortKey: -1770897394582
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "username": "tutor_demo",
+              "email": "tutor@email.com",
+              "password": "SenhaForte123@",
+              "telefone": "31999999999",
+              "endereco": "Rua Central, 100"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/auth/refresh/"
+        name: Refresh Token
+        meta:
+          id: req_c81e062ccc344e6b96f9b64929116a1b
+          created: 1770899620749
+          modified: 1770899914994
+          isPrivate: false
+          description: ""
+          sortKey: -1770899620749
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "refresh": "{{ refresh_token }}"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/auth/login/"
+        name: Login (Admin)
+        meta:
+          id: req_30268c97e9cc4c838eda70ac2175f7ed
+          created: 1770900825497
+          modified: 1770900962111
+          isPrivate: false
+          description: ""
+          sortKey: -1770900825497
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "username": "admin",
+              "password": "admin123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Pets
+    meta:
+      id: fld_66e1f58dd7ee4e0391df21a275a7f44a
+      created: 1770896519427
+      modified: 1770901274029
+      sortKey: -1770896526166
+      description: ""
+    children:
+      - url: "{{ base_url }}/api/pets/"
+        name: List Pets
+        meta:
+          id: req_92f572ca01084e3d94403df176802f97
+          created: 1770897289142
+          modified: 1770897423437
+          isPrivate: false
+          description: ""
+          sortKey: -1770897289142
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/pets/"
+        name: Create Pet
+        meta:
+          id: req_0d49fdab436649f8b44f773d5201720e
+          created: 1770900110650
+          modified: 1770900686961
+          isPrivate: false
+          description: ""
+          sortKey: -1770900110650
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Rex",
+              "especie": "Cachorro",
+              "raca": "Labrador",
+              "data_nascimento": "2021-06-15"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/pets/{{ pet_id }}/"
+        name: Retrieve Pet
+        meta:
+          id: req_1087eb9a10e2421889b665944a575edc
+          created: 1770900296428
+          modified: 1770900578696
+          isPrivate: false
+          description: ""
+          sortKey: -1770900296428
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/pets/{{ pet_id }}/"
+        name: Delete Pet
+        meta:
+          id: req_529bf3fe5e754a59a2346ae758d2da98
+          created: 1770900540165
+          modified: 1770900603195
+          isPrivate: false
+          description: ""
+          sortKey: -1770900540165
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Vaccines
+    meta:
+      id: fld_652edbab5d3a4b67b8b363973bc8c385
+      created: 1770896526116
+      modified: 1770897399052
+      sortKey: -1770896526116
+      description: ""
+    children:
+      - url: "{{ base_url }}/api/pets/{{ pet_id }}/vaccines/"
+        name: List Vaccines by Pet
+        meta:
+          id: req_c0873602c0574553ab6963ef34b28f6d
+          created: 1770897730009
+          modified: 1770901188323
+          isPrivate: false
+          description: ""
+          sortKey: -1770897730009
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ base_url }}/api/pets/{{ pet_id }}/vaccines/"
+        name: Create Vaccine (ADMIN ONLY)
+        meta:
+          id: req_34bc5033a5a6440eb0fcd71155865e9e
+          created: 1770900628376
+          modified: 1770901146132
+          isPrivate: false
+          description: ""
+          sortKey: -1770900628376
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "name": "Antirrábica",
+              "applied_at": "2024-02-01",
+              "next_dose": "2025-02-01",
+              "notes": "Aplicada na clínica central"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.3.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ access_token }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8ea5301d76c9de61ea5926b1d60226adb3116eed
+    created: 1770896489037
+    modified: 1770896489037
+environments:
+  name: Base Environment
+  meta:
+    id: env_8ea5301d76c9de61ea5926b1d60226adb3116eed
+    created: 1770896489035
+    modified: 1770901243121
+    isPrivate: false
+  data:
+    base_url: http://127.0.0.1:8000
+    access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzcwOTE5MjMzLCJpYXQiOjE3NzA5MDEyMzMsImp0aSI6IjI0MDU3NmRiZDY3YTQ3YmRhYTZmZWVlOGNjMTU1ODg3IiwidXNlcl9pZCI6IjUifQ.D5AYeyoMSUkQeRrLcOfTF1dJ8HTk2QBmhhATn1mZM40
+    pet_id: "6"
