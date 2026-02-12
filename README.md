@@ -336,15 +336,3 @@ Como importar:
 3. Selecione `docs/insomnia_collection.yaml`
 
 ---
-
-##  Conclusão
-
-A API foi estruturada com foco em:
-
-- ✅ Clareza de regras de negócio
-- ✅ Segurança
-- ✅ Separação de responsabilidades
-- ✅ Escalabilidade futura
-- ✅ Boas práticas com Django REST Framework
-
----
