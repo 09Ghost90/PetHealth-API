@@ -25,6 +25,7 @@ Sistema baseado no fluxo real de uma clínica veterinária:
 - Um tutor **não pode acessar dados de pets de outros tutores**.
 - **Funcionários** (`is_staff=True`) possuem acesso total.
 - Usuário **não autenticado** não acessa nenhum recurso.
+- Automação de prazos: O cálculo da próxima dose não é manual, mas utiliza a data do tipo da vacina (VaccineType). 
 
 ---
 
@@ -47,7 +48,7 @@ Sistema baseado no fluxo real de uma clínica veterinária:
 core/        → Configuração principal do projeto
 users/       → Usuários e Tutores
 pets/        → Gerenciamento de pets
-vaccines/    → Registro de vacinação
+vaccines/    → Registro de vacinação + catálogo tipo de vacinas
 ```
 
 ###  Motivação da Estrutura
@@ -233,7 +234,15 @@ Authorization: Bearer <access_token>
 | POST | `/api/pets/` | Criar pet |
 | GET | `/api/pets/{id}/` | Detalhe do pet |
 | GET | `/api/pets/{id}/vaccines/` | Listar vacinas do pet |
+| GET | `/api/vaccine-types/` | Lista os tipos de vacinas disponíveis (Catálogo) |
+| POST | `/api/vaccine-types/` | Cria um novo tipo de vacina (Admin) |
 | POST | `/api/pets/{id}/vaccines/` | Registrar vacina (admin) |
+
+--- 
+
+## Dica Visual
+
+- Pets e Vacinas listam o Tutor e nomes legíveis para facilitar a gestão por usuário administrativos.
 
 ---
 
