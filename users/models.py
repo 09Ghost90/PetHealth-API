@@ -21,6 +21,7 @@ class Tutor(models.Model):
         return self.user.username
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+# Função Signal para criar um tutor automaticamente quando um novo usuário é criado
 def create_tutor(sender, instance, created, **kwargs):
     if created:
         Tutor.objects.create(user=instance)
